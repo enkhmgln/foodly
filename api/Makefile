@@ -11,3 +11,6 @@ clean:
 
 test:
 	./mvnw test
+
+compile:
+	./mvnw compile
