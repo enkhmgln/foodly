@@ -22,15 +22,15 @@ class ScanController extends GetxController {
         Get.offNamed(ProductDetailView.routeName, arguments: product);
       } else {
         Get.snackbar(
-          'Product not found',
-          'No product found for this barcode.',
+          'Бүтээгдэхүүн олдсонгүй',
+          'Энэ баркодтой бүтээгдэхүүн олдсонгүй.',
           snackPosition: SnackPosition.BOTTOM,
         );
         _hasHandledBarcode = false;
       }
     } catch (e) {
       errorMessage.value = e.toString();
-      Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Алдаа', e.toString(), snackPosition: SnackPosition.BOTTOM);
       _hasHandledBarcode = false;
     } finally {
       isLoading.value = false;

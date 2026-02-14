@@ -4,9 +4,29 @@ import 'package:foodly/app/theme/app_colors.dart';
 abstract class AppTheme {
   AppTheme._();
 
+  static const String _fontFamily = 'Gilroy';
+
   static ThemeData get theme {
     return ThemeData(
       useMaterial3: true,
+      fontFamily: _fontFamily,
+      textTheme: const TextTheme(
+        displayLarge: TextStyle(fontFamily: _fontFamily),
+        displayMedium: TextStyle(fontFamily: _fontFamily),
+        displaySmall: TextStyle(fontFamily: _fontFamily),
+        headlineLarge: TextStyle(fontFamily: _fontFamily),
+        headlineMedium: TextStyle(fontFamily: _fontFamily),
+        headlineSmall: TextStyle(fontFamily: _fontFamily),
+        titleLarge: TextStyle(fontFamily: _fontFamily),
+        titleMedium: TextStyle(fontFamily: _fontFamily),
+        titleSmall: TextStyle(fontFamily: _fontFamily),
+        bodyLarge: TextStyle(fontFamily: _fontFamily),
+        bodyMedium: TextStyle(fontFamily: _fontFamily),
+        bodySmall: TextStyle(fontFamily: _fontFamily),
+        labelLarge: TextStyle(fontFamily: _fontFamily),
+        labelMedium: TextStyle(fontFamily: _fontFamily),
+        labelSmall: TextStyle(fontFamily: _fontFamily),
+      ),
       colorScheme: ColorScheme.light(
         primary: AppColors.primary,
         onPrimary: Colors.white,

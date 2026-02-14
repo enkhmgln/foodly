@@ -14,7 +14,7 @@ class SearchView extends GetView<search.SearchController> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Search'),
+        title: const Text('Хайлт'),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(56),
           child: Padding(
@@ -22,7 +22,7 @@ class SearchView extends GetView<search.SearchController> {
             child: TextField(
               autofocus: true,
               decoration: InputDecoration(
-                hintText: 'Search products...',
+                hintText: 'Бүтээгдэхүүн хайх...',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: Obx(() {
                   if (controller.searchQuery.value.isEmpty) return const SizedBox.shrink();
@@ -60,7 +60,7 @@ class SearchView extends GetView<search.SearchController> {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () => controller.searchQuery.refresh(),
-                    child: const Text('Retry'),
+                    child: const Text('Дахин оролдох'),
                   ),
                 ],
               ),
@@ -70,7 +70,7 @@ class SearchView extends GetView<search.SearchController> {
         if (controller.searchQuery.value.trim().isEmpty) {
           return Center(
             child: Text(
-              'Type to search products',
+              'Бүтээгдэхүүн хайхын тулд бичнэ үү',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: AppColors.textSecondary,
                   ),
@@ -80,7 +80,7 @@ class SearchView extends GetView<search.SearchController> {
         if (controller.products.isEmpty) {
           return Center(
             child: Text(
-              'No products found',
+              'Бүтээгдэхүүн олдсонгүй',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: AppColors.textSecondary,
                   ),

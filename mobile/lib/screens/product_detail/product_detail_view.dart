@@ -14,7 +14,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Product'),
+        title: const Text('Бүтээгдэхүүн'),
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
@@ -35,7 +35,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
                   const SizedBox(height: 16),
                   TextButton(
                     onPressed: () => Get.back(),
-                    child: const Text('Go back'),
+                    child: const Text('Буцах'),
                   ),
                 ],
               ),
@@ -44,7 +44,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
         }
         final p = controller.product.value;
         if (p == null) {
-          return const Center(child: Text('Product not found'));
+          return const Center(child: Text('Бүтээгдэхүүн олдсонгүй'));
         }
         return SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -105,14 +105,14 @@ class ProductDetailView extends GetView<ProductDetailController> {
               ),
               const SizedBox(height: 32),
               Text(
-                'Better alternatives',
+                'Илүү сайн сонголтууд',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
               ),
               const SizedBox(height: 8),
               Text(
-                'No alternatives yet',
+                'Одоогоор сонголт байхгүй',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.textSecondary,
                     ),

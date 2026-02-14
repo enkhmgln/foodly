@@ -37,7 +37,7 @@ class ScoreCircle extends StatelessWidget {
                 ),
           ),
           Text(
-            ProductModel.gradeLabel(grade),
+            _gradeLabelMn(grade),
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: color,
                   fontWeight: FontWeight.w600,
@@ -58,6 +58,19 @@ class ScoreCircle extends StatelessWidget {
         return AppColors.scoreGood;
       case ProductGrade.excellent:
         return AppColors.scoreExcellent;
+    }
+  }
+
+  static String _gradeLabelMn(ProductGrade grade) {
+    switch (grade) {
+      case ProductGrade.bad:
+        return 'Муу';
+      case ProductGrade.mediocre:
+        return 'Дунд';
+      case ProductGrade.good:
+        return 'Сайн';
+      case ProductGrade.excellent:
+        return 'Маш сайн';
     }
   }
 }

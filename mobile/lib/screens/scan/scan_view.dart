@@ -16,7 +16,7 @@ class ScanView extends GetView<ScanController> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
-        title: const Text('Scan product'),
+        title: const Text('Бүтээгдэхүүн скан хийх'),
       ),
       body: Stack(
         children: [
