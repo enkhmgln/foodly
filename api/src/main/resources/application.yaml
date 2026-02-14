@@ -15,7 +15,7 @@ spring:
       minimum-idle: 2
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update # typically set to validate in Production
       naming:
         physical-strategy: com.nexusinfinity.api.core.config.UppercasePhysicalNamingStrategy
     show-sql: false

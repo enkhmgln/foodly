@@ -21,9 +21,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "products", indexes = {
-    @Index(name = "idx_products_barcode", columnList = "barcode", unique = true),
-    @Index(name = "idx_products_name", columnList = "name")
+@Table(name = "product", indexes = {
+    @Index(name = "idx_product_barcode", columnList = "barcode", unique = true),
+    @Index(name = "idx_product_name", columnList = "name")
 })
 @Getter
 @NoArgsConstructor
