@@ -1,8 +1,7 @@
-.PHONY: run build clean test
+.PHONY: run restart build clean test compile
 
 run:
 	./mvnw spring-boot:run
-
 build:
 	./mvnw package -DskipTests
 
