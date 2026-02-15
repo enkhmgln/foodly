@@ -2,7 +2,6 @@ package com.nexusinfinity.api.core.security;
 
 import java.io.IOException;
 
-import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -27,10 +26,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(
-            @NonNull HttpServletRequest request,
-            @NonNull HttpServletResponse response,
-            @NonNull FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         String authHeader = request.getHeader(AUTHORIZATION_HEADER);
         if (authHeader == null || !authHeader.startsWith(BEARER_PREFIX)) {
             filterChain.doFilter(request, response);
@@ -43,8 +40,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         try {
             String subject = jwtService.parseSubject(token);
-            UsernamePasswordAuthenticationToken authentication =
-                    new UsernamePasswordAuthenticationToken(subject, null, java.util.Collections.emptyList());
+            UsernamePasswordAuthenticationToken authentication
+                    = new UsernamePasswordAuthenticationToken(subject, null, java.util.Collections.emptyList());
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception ignored) {
