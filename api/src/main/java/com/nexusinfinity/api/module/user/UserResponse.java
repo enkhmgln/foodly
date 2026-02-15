@@ -1,4 +1,4 @@
-package com.nexusinfinity.api.user;
+package com.nexusinfinity.api.module.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

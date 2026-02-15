@@ -1,4 +1,4 @@
-package com.nexusinfinity.api.notification;
+package com.nexusinfinity.api.module.notification;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
-import com.nexusinfinity.api.user.User;
+import com.nexusinfinity.api.module.user.User;
 
 @Service
 public class FcmService {

@@ -1,9 +1,9 @@
-package com.nexusinfinity.api.notification;
+package com.nexusinfinity.api.module.notification;
 
 import java.time.Instant;
 
 import com.nexusinfinity.api.core.entity.BaseEntity;
-import com.nexusinfinity.api.user.User;
+import com.nexusinfinity.api.module.user.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

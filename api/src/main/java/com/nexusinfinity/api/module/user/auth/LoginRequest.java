@@ -1,4 +1,4 @@
-package com.nexusinfinity.api.user.auth;
+package com.nexusinfinity.api.module.user.auth;
 
 import jakarta.validation.constraints.NotBlank;
 

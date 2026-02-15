@@ -1,4 +1,4 @@
-package com.nexusinfinity.api.product;
+package com.nexusinfinity.api.module.product;
 
 import java.util.List;
 

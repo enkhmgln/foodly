@@ -1,4 +1,4 @@
-package com.nexusinfinity.api.notification;
+package com.nexusinfinity.api.module.notification;
 
 import java.util.Optional;
 import java.util.UUID;

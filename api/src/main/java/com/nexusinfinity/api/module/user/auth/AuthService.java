@@ -1,4 +1,4 @@
-package com.nexusinfinity.api.user.auth;
+package com.nexusinfinity.api.module.user.auth;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,12 +7,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.nexusinfinity.api.core.response.ApiMessages;
 import com.nexusinfinity.api.core.security.JwtService;
-import com.nexusinfinity.api.notification.FcmService;
-import com.nexusinfinity.api.notification.Notification;
-import com.nexusinfinity.api.notification.NotificationRepository;
-import com.nexusinfinity.api.user.User;
-import com.nexusinfinity.api.user.UserRepository;
-import com.nexusinfinity.api.user.UserResponse;
+import com.nexusinfinity.api.module.notification.FcmService;
+import com.nexusinfinity.api.module.notification.Notification;
+import com.nexusinfinity.api.module.notification.NotificationRepository;
+import com.nexusinfinity.api.module.user.User;
+import com.nexusinfinity.api.module.user.UserRepository;
+import com.nexusinfinity.api.module.user.UserResponse;
 
 @Service
 public class AuthService {

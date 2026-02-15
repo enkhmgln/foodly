@@ -1,4 +1,4 @@
-package com.nexusinfinity.api.user.auth;
+package com.nexusinfinity.api.module.user.auth;
 
 import static org.springframework.http.HttpStatus.OK;
 import org.springframework.http.ResponseEntity;

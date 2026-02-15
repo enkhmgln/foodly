@@ -1,4 +1,4 @@
-package com.nexusinfinity.api.user;
+package com.nexusinfinity.api.module.user;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nexusinfinity.api.core.response.ApiResponse;
-import com.nexusinfinity.api.user.auth.AuthService;
+import com.nexusinfinity.api.module.user.auth.AuthService;
 
 @RestController
 @RequestMapping("/users")
