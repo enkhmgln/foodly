@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/core/utils/validator.dart';
 
 class AppTextFieldModel {
   AppTextFieldModel({
@@ -11,8 +12,10 @@ class AppTextFieldModel {
     this.autofocus = false,
     this.maxLength,
     this.maxLines = 1,
+    this.validators,
   })  : controller = TextEditingController(),
-        focusNode = FocusNode();
+        focusNode = FocusNode(),
+        errorText = ValueNotifier<String?>(null);
 
   final String? label;
   final String? hint;
@@ -23,11 +26,14 @@ class AppTextFieldModel {
   final bool autofocus;
   final int? maxLength;
   final int maxLines;
+  final List<ValidatorType>? validators;
 
   final TextEditingController controller;
   final FocusNode focusNode;
+  final ValueNotifier<String?> errorText;
 
   String get value => controller.text;
+  bool get isValid => errorText.value == null;
 
   void setText(String text) {
     controller.text = text;
@@ -36,5 +42,6 @@ class AppTextFieldModel {
   void dispose() {
     controller.dispose();
     focusNode.dispose();
+    errorText.dispose();
   }
 }
