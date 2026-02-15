@@ -41,14 +41,15 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: showLeading ? null : 0,
       actions: actions,
       bottom: bottom,
-      title: title ??
+      title:
+          title ??
           (titleText != null
               ? Text(
                   titleText!,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: foregroundColor ?? AppColors.textPrimary,
-                      ),
+                    fontWeight: FontWeight.w600,
+                    color: foregroundColor ?? AppColors.textPrimary,
+                  ),
                 )
               : null),
     );
