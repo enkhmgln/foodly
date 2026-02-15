@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/client/api/user_api.dart';
 import '/components/_.dart';
-import '/components/text_field/_.dart';
 import '/core/constants/constant.dart';
 import '/core/shared/store_manager.dart';
 import '/core/utils/validator.dart';
@@ -20,7 +19,9 @@ class SignupController extends GetxController {
   );
 
   final nameModel = AppTextFieldModel(
-    label: 'Нэр (заавал биш)',
+    label: 'Нэр',
+    hint: 'Нэрээ оруулна уу',
+    validators: [ValidatorType.notEmpty],
   );
 
   final passwordModel = AppTextFieldModel(
@@ -51,15 +52,29 @@ class SignupController extends GetxController {
 
   void _runValidation() {
     if (emailModel.validators != null && emailModel.validators!.isNotEmpty) {
-      final r = Validator(validations: emailModel.validators!).isValid(emailModel.value);
+      final r = Validator(
+        validations: emailModel.validators!,
+      ).isValid(emailModel.value);
       emailModel.errorText.value = r.$2;
     }
-    if (passwordModel.validators != null && passwordModel.validators!.isNotEmpty) {
-      final r = Validator(validations: passwordModel.validators!).isValid(passwordModel.value);
+    if (nameModel.validators != null && nameModel.validators!.isNotEmpty) {
+      final r = Validator(
+        validations: nameModel.validators!,
+      ).isValid(nameModel.value);
+      nameModel.errorText.value = r.$2;
+    }
+    if (passwordModel.validators != null &&
+        passwordModel.validators!.isNotEmpty) {
+      final r = Validator(
+        validations: passwordModel.validators!,
+      ).isValid(passwordModel.value);
       passwordModel.errorText.value = r.$2;
     }
-    if (confirmPasswordModel.validators != null && confirmPasswordModel.validators!.isNotEmpty) {
-      final r = Validator(validations: confirmPasswordModel.validators!).isValid(confirmPasswordModel.value);
+    if (confirmPasswordModel.validators != null &&
+        confirmPasswordModel.validators!.isNotEmpty) {
+      final r = Validator(
+        validations: confirmPasswordModel.validators!,
+      ).isValid(confirmPasswordModel.value);
       confirmPasswordModel.errorText.value = r.$2;
     }
   }
@@ -74,7 +89,11 @@ class SignupController extends GetxController {
       confirmPasswordModel.errorText.value = 'Нууц үг тохирохгүй байна';
       return;
     }
-    if (!emailModel.isValid || !passwordModel.isValid || !confirmPasswordModel.isValid) return;
+    if (!emailModel.isValid ||
+        !nameModel.isValid ||
+        !passwordModel.isValid ||
+        !confirmPasswordModel.isValid)
+      return;
 
     final e = emailModel.value.trim();
     final n = nameModel.value.trim();
@@ -82,7 +101,7 @@ class SignupController extends GetxController {
     final result = await _userApi.signUp(
       email: e,
       password: p,
-      name: n.isEmpty ? null : n,
+      name: n,
     );
     if (result.isSuccess) {
       final data = result.dataOrNull;

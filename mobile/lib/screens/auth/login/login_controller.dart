@@ -37,11 +37,16 @@ class LoginController extends GetxController {
 
   void _runValidation() {
     if (emailModel.validators != null && emailModel.validators!.isNotEmpty) {
-      final r = Validator(validations: emailModel.validators!).isValid(emailModel.value);
+      final r = Validator(
+        validations: emailModel.validators!,
+      ).isValid(emailModel.value);
       emailModel.errorText.value = r.$2;
     }
-    if (passwordModel.validators != null && passwordModel.validators!.isNotEmpty) {
-      final r = Validator(validations: passwordModel.validators!).isValid(passwordModel.value);
+    if (passwordModel.validators != null &&
+        passwordModel.validators!.isNotEmpty) {
+      final r = Validator(
+        validations: passwordModel.validators!,
+      ).isValid(passwordModel.value);
       passwordModel.errorText.value = r.$2;
     }
   }
