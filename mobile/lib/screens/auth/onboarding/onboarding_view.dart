@@ -51,6 +51,12 @@ class OnboardingView extends GetView<OnboardingController> {
                 ],
               ),
             ),
+            const SizedBox(height: 8),
+            Obx(() => _PageIndicator(
+              currentIndex: controller.currentPage.value,
+              pageCount: OnboardingController.totalPages,
+            )),
+            const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.all(24),
               child: Obx(() {
@@ -78,6 +84,39 @@ class OnboardingView extends GetView<OnboardingController> {
   }
 }
 
+class _PageIndicator extends StatelessWidget {
+  const _PageIndicator({
+    required this.currentIndex,
+    required this.pageCount,
+  });
+
+  final int currentIndex;
+  final int pageCount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(pageCount, (index) {
+        final isActive = index == currentIndex;
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeInOut,
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          height: 8,
+          width: isActive ? 24 : 8,
+          decoration: BoxDecoration(
+            color: isActive
+                ? AppColors.primary
+                : AppColors.primary.withValues(alpha: 0.3),
+            borderRadius: BorderRadius.circular(4),
+          ),
+        );
+      }),
+    );
+  }
+}
+
 class _OnboardingPage extends StatelessWidget {
   const _OnboardingPage({
     required this.icon,
@@ -96,7 +135,14 @@ class _OnboardingPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 80, color: AppColors.primary),
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: AppColors.primary.withValues(alpha: 0.08),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, size: 64, color: AppColors.primary),
+          ),
           const SizedBox(height: 32),
           Text(
             title,
@@ -109,9 +155,9 @@ class _OnboardingPage extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             subtitle,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: AppColors.textSecondary,
+            ),
             textAlign: TextAlign.center,
           ),
         ],
