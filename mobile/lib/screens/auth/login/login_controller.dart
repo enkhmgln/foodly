@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/client/api/user_api.dart';
 import '/components/_.dart';
-import '/components/text_field/_.dart';
 import '/core/constants/constant.dart';
+import '/core/notification/fcm_registration_manager.dart';
 import '/core/shared/store_manager.dart';
+import '/core/shared/user_manager.dart';
 import '/core/utils/validator.dart';
 import '/screens/auth/signup/_.dart';
 import '/screens/home/home/_.dart';
@@ -58,8 +59,14 @@ class LoginController extends GetxController {
 
     final e = emailModel.value.trim();
     final p = passwordModel.value;
+    await FcmRegistrationManager.shared.ensureToken();
+    final fcmToken = UserManager.fcmToken;
     isLoading.value = true;
-    final result = await _userApi.login(email: e, password: p);
+    final result = await _userApi.login(
+      email: e,
+      password: p,
+      fcmToken: fcmToken.isNotEmpty ? fcmToken : null,
+    );
     if (result.isSuccess) {
       final data = result.dataOrNull;
       if (data != null) {

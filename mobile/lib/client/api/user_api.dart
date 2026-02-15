@@ -11,6 +11,7 @@ class UserApi {
     required String email,
     required String password,
     String? name,
+    String? fcmToken,
   }) async {
     return _sender.post(
       '/api/auth/signup',
@@ -18,24 +19,27 @@ class UserApi {
         'email': email.trim().toLowerCase(),
         'password': password,
         if (name != null && name.trim().isNotEmpty) 'name': name.trim(),
+        if (fcmToken != null && fcmToken.trim().isNotEmpty)
+          'fcmToken': fcmToken.trim(),
       },
-      fromJson: (d) =>
-          AuthResponseModel.fromJson(d as Map<String, dynamic>),
+      fromJson: (d) => AuthResponseModel.fromJson(d as Map<String, dynamic>),
     );
   }
 
   Future<ApiResult<AuthResponseModel>> login({
     required String email,
     required String password,
+    String? fcmToken,
   }) async {
     return _sender.post(
       '/api/auth/login',
       data: {
         'email': email.trim().toLowerCase(),
         'password': password,
+        if (fcmToken != null && fcmToken.trim().isNotEmpty)
+          'fcmToken': fcmToken.trim(),
       },
-      fromJson: (d) =>
-          AuthResponseModel.fromJson(d as Map<String, dynamic>),
+      fromJson: (d) => AuthResponseModel.fromJson(d as Map<String, dynamic>),
     );
   }
 

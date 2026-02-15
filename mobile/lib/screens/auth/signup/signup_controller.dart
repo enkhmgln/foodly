@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import '/client/api/user_api.dart';
 import '/components/_.dart';
 import '/core/constants/constant.dart';
+import '/core/notification/fcm_registration_manager.dart';
 import '/core/shared/store_manager.dart';
+import '/core/shared/user_manager.dart';
 import '/core/utils/validator.dart';
 import '/screens/auth/login/_.dart';
 import '/screens/home/home/_.dart';
@@ -97,11 +99,14 @@ class SignupController extends GetxController {
 
     final e = emailModel.value.trim();
     final n = nameModel.value.trim();
+    await FcmRegistrationManager.shared.ensureToken();
+    final fcmToken = UserManager.fcmToken;
     isLoading.value = true;
     final result = await _userApi.signUp(
       email: e,
       password: p,
       name: n,
+      fcmToken: fcmToken.isNotEmpty ? fcmToken : null,
     );
     if (result.isSuccess) {
       final data = result.dataOrNull;
