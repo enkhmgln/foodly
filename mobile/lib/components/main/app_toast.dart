@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/theme/app_colors.dart';
 
-/// App-level toast (snackbar) with consistent styling.
 abstract class AppToast {
   AppToast._();
 
@@ -13,7 +12,9 @@ abstract class AppToast {
     SnackPosition position = SnackPosition.BOTTOM,
     Duration duration = const Duration(seconds: 3),
   }) {
-    final backgroundColor = isError ? AppColors.scoreBad : AppColors.textPrimary;
+    final backgroundColor = isError
+        ? AppColors.scoreBad
+        : AppColors.textPrimary;
     Get.snackbar(
       title ?? '',
       message,
@@ -35,27 +36,16 @@ abstract class AppToast {
           : const SizedBox.shrink(),
       messageText: Text(
         message,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 13,
-        ),
+        style: const TextStyle(color: Colors.white, fontSize: 13),
       ),
     );
   }
 
   static void showError(String message, {String? title}) {
-    show(
-      message,
-      title: title ?? 'Алдаа',
-      isError: true,
-    );
+    show(message, title: title ?? 'Алдаа', isError: true);
   }
 
   static void showSuccess(String message, {String? title}) {
-    show(
-      message,
-      title: title ?? 'Амжилттай',
-      isError: false,
-    );
+    show(message, title: title ?? 'Амжилттай', isError: false);
   }
 }
