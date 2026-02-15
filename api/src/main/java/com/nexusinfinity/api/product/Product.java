@@ -57,7 +57,7 @@ public class Product {
     @CollectionTable(name = "product_issue_tags", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "tag")
     @Builder.Default
-    private List<String> issueTags = new ArrayList<>();
+    private final List<String> issueTags = new ArrayList<>();
 
     @Column(length = 500)
     private String imageUrl;
