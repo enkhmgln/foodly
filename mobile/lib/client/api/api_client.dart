@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:foodly/client/api/api_config.dart';
-import 'package:foodly/core/services/auth_service.dart';
+import '/client/api/api_config.dart';
+import '/core/services/auth_service.dart';
 
 class ApiClient extends GetxService {
   late final dio.Dio _dio;
@@ -10,18 +10,19 @@ class ApiClient extends GetxService {
   @override
   void onInit() {
     super.onInit();
-    _dio = dio.Dio(dio.BaseOptions(
-      baseUrl: ApiConfig.baseUrl,
-      connectTimeout: ApiConfig.connectTimeout,
-      receiveTimeout: ApiConfig.receiveTimeout,
-      headers: {'Accept': 'application/json'},
-    ));
+    _dio = dio.Dio(
+      dio.BaseOptions(
+        baseUrl: ApiConfig.baseUrl,
+        connectTimeout: ApiConfig.connectTimeout,
+        receiveTimeout: ApiConfig.receiveTimeout,
+        headers: {'Accept': 'application/json'},
+      ),
+    );
     _dio.interceptors.add(_AuthInterceptor());
     if (kDebugMode) {
-      _dio.interceptors.add(dio.LogInterceptor(
-        requestBody: true,
-        responseBody: true,
-      ));
+      _dio.interceptors.add(
+        dio.LogInterceptor(requestBody: true, responseBody: true),
+      );
     }
   }
 
@@ -32,10 +33,7 @@ class ApiClient extends GetxService {
     return _dio.get<T>(path, queryParameters: queryParameters);
   }
 
-  Future<dio.Response<T>> post<T>(
-    String path, {
-    dynamic data,
-  }) async {
+  Future<dio.Response<T>> post<T>(String path, {dynamic data}) async {
     return _dio.post<T>(path, data: data);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:foodly/client/api/product_api.dart';
-import 'package:foodly/screens/scan/scan_controller.dart';
+import '/client/api/product_api.dart';
+import '/screens/scan/scan_controller.dart';
 
 class ScanBinding extends Bindings {
   @override

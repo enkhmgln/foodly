@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:foodly/core/services/auth_service.dart';
-import 'package:foodly/core/storage/onboarding_storage.dart';
-import 'package:foodly/screens/auth/onboarding/_.dart';
-import 'package:foodly/screens/auth/login/_.dart';
-import 'package:foodly/screens/home/home/_.dart';
+import '/core/services/auth_service.dart';
+import '/core/storage/onboarding_storage.dart';
+import '/screens/auth/onboarding/_.dart';
+import '/screens/auth/login/_.dart';
+import '/screens/home/home/_.dart';
 
 class InitController extends GetxController {
   final OnboardingStorage _onboardingStorage = Get.find<OnboardingStorage>();
@@ -27,7 +27,8 @@ class InitController extends GetxController {
       return;
     }
 
-    if (_authService.getToken() != null && _authService.getToken()!.isNotEmpty) {
+    if (_authService.getToken() != null &&
+        _authService.getToken()!.isNotEmpty) {
       Get.offAllNamed(HomeView.routeName);
       return;
     }

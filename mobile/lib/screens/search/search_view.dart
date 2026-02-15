@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:foodly/app/theme/app_colors.dart';
-import 'package:foodly/screens/search/search_controller.dart' as search;
-import 'package:foodly/screens/search/search_widgets.dart';
+import '/app/theme/app_colors.dart';
+import '/screens/search/search_controller.dart' as search;
+import '/screens/search/search_widgets.dart';
 
 class SearchView extends GetView<search.SearchController> {
   const SearchView({super.key});
@@ -25,7 +25,8 @@ class SearchView extends GetView<search.SearchController> {
                 hintText: 'Бүтээгдэхүүн хайх...',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: Obx(() {
-                  if (controller.searchQuery.value.isEmpty) return const SizedBox.shrink();
+                  if (controller.searchQuery.value.isEmpty)
+                    return const SizedBox.shrink();
                   return IconButton(
                     icon: const Icon(Icons.clear),
                     onPressed: () {
@@ -71,9 +72,9 @@ class SearchView extends GetView<search.SearchController> {
           return Center(
             child: Text(
               'Бүтээгдэхүүн хайхын тулд бичнэ үү',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
             ),
           );
         }
@@ -81,9 +82,9 @@ class SearchView extends GetView<search.SearchController> {
           return Center(
             child: Text(
               'Бүтээгдэхүүн олдсонгүй',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
             ),
           );
         }

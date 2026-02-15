@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:foodly/client/api/product_api.dart';
-import 'package:foodly/screens/search/search_controller.dart';
+import '/client/api/product_api.dart';
+import '/screens/search/search_controller.dart';
 
 class SearchBinding extends Bindings {
   @override

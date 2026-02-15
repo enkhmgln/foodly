@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:foodly/core/constants/storage_keys.dart';
+import '/core/constants/storage_keys.dart';
 
 class SecureStorageService {
   static const _storage = FlutterSecureStorage(

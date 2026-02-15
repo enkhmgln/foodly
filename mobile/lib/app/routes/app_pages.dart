@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:foodly/screens/init/_.dart';
-import 'package:foodly/screens/auth/onboarding/_.dart';
-import 'package:foodly/screens/auth/login/_.dart';
-import 'package:foodly/screens/auth/signup/_.dart';
-import 'package:foodly/screens/home/home/_.dart';
-import 'package:foodly/screens/scan/_.dart';
-import 'package:foodly/screens/search/_.dart';
-import 'package:foodly/screens/product_detail/_.dart';
+import '/screens/init/_.dart';
+import '/screens/auth/onboarding/_.dart';
+import '/screens/auth/login/_.dart';
+import '/screens/auth/signup/_.dart';
+import '/screens/home/home/_.dart';
+import '/screens/scan/_.dart';
+import '/screens/search/_.dart';
+import '/screens/product_detail/_.dart';
 
 class AppPages {
   AppPages._();

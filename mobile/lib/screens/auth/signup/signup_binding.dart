@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:foodly/client/api/auth_api.dart';
-import 'package:foodly/screens/auth/signup/signup_controller.dart';
+import '/client/api/auth_api.dart';
+import '/screens/auth/signup/signup_controller.dart';
 
 class SignupBinding extends Bindings {
   @override

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:foodly/app/theme/app_colors.dart';
-import 'package:foodly/core/constants/app_constants.dart';
-import 'package:foodly/screens/home/home/home_controller.dart';
+import '/app/theme/app_colors.dart';
+import '/core/constants/app_constants.dart';
+import '/screens/home/home/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});

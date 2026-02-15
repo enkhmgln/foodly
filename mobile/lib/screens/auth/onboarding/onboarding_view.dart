@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:foodly/app/theme/app_colors.dart';
-import 'package:foodly/screens/auth/onboarding/onboarding_controller.dart';
+import '/app/theme/app_colors.dart';
+import '/screens/auth/onboarding/onboarding_controller.dart';
 
 class OnboardingView extends GetView<OnboardingController> {
   const OnboardingView({super.key});
@@ -33,17 +33,20 @@ class OnboardingView extends GetView<OnboardingController> {
                   _OnboardingPage(
                     icon: Icons.qr_code_scanner,
                     title: 'Бүтээгдэхүүн скан хий',
-                    subtitle: 'Баркод уншуулж бүтээгдэхүүний мэдээллийг шууд аваарай.',
+                    subtitle:
+                        'Баркод уншуулж бүтээгдэхүүний мэдээллийг шууд аваарай.',
                   ),
                   _OnboardingPage(
                     icon: Icons.health_and_safety,
                     title: 'Эрүүл мэндийн үнэлгээ',
-                    subtitle: 'Энгийн оноо болон дүгнэлтээр бүтээгдэхүүний эрүүл мэндийг харна уу.',
+                    subtitle:
+                        'Энгийн оноо болон дүгнэлтээр бүтээгдэхүүний эрүүл мэндийг харна уу.',
                   ),
                   _OnboardingPage(
                     icon: Icons.thumb_up,
                     title: 'Илүү сайн сонголт',
-                    subtitle: 'Илүү эрүүл сонголтуудыг олж, зөв шийдэл гаргаарай.',
+                    subtitle:
+                        'Илүү эрүүл сонголтуудыг олж, зөв шийдэл гаргаарай.',
                   ),
                 ],
               ),
@@ -51,11 +54,15 @@ class OnboardingView extends GetView<OnboardingController> {
             Padding(
               padding: const EdgeInsets.all(24),
               child: Obx(() {
-                final isLast = controller.currentPage.value == OnboardingController.totalPages - 1;
+                final isLast =
+                    controller.currentPage.value ==
+                    OnboardingController.totalPages - 1;
                 return SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: isLast ? controller.onGetStarted : controller.nextPage,
+                    onPressed: isLast
+                        ? controller.onGetStarted
+                        : controller.nextPage,
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
@@ -94,17 +101,17 @@ class _OnboardingPage extends StatelessWidget {
           Text(
             title,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
-                ),
+              fontWeight: FontWeight.bold,
+              color: AppColors.textPrimary,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
           Text(
             subtitle,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: AppColors.textSecondary,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
             textAlign: TextAlign.center,
           ),
         ],

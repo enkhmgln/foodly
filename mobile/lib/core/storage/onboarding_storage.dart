@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:foodly/core/constants/storage_keys.dart';
+import '/core/constants/storage_keys.dart';
 
 class OnboardingStorage {
   static const String _key = StorageKeys.onboardingDone;

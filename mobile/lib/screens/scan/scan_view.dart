@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:foodly/app/theme/app_colors.dart';
-import 'package:foodly/screens/scan/scan_controller.dart';
+import '/app/theme/app_colors.dart';
+import '/screens/scan/scan_controller.dart';
 
 class ScanView extends GetView<ScanController> {
   const ScanView({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:foodly/app/theme/app_colors.dart';
-import 'package:foodly/client/models/product_model.dart';
-import 'package:foodly/screens/product_detail/_.dart';
+import '/app/theme/app_colors.dart';
+import '/client/models/product_model.dart';
+import '/screens/product_detail/_.dart';
 
 class ProductListTile extends StatelessWidget {
   const ProductListTile({
@@ -32,7 +32,10 @@ class ProductListTile extends StatelessWidget {
           ),
           child: product.imageUrl != null && product.imageUrl!.isNotEmpty
               ? Image.network(product.imageUrl!, fit: BoxFit.cover)
-              : Icon(Icons.inventory_2_outlined, color: AppColors.textSecondary),
+              : Icon(
+                  Icons.inventory_2_outlined,
+                  color: AppColors.textSecondary,
+                ),
         ),
         title: Text(
           product.name,
@@ -42,10 +45,7 @@ class ProductListTile extends StatelessWidget {
         ),
         subtitle: Text(
           product.brand,
-          style: TextStyle(
-            color: AppColors.textSecondary,
-            fontSize: 13,
-          ),
+          style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -64,10 +64,8 @@ class ProductListTile extends StatelessWidget {
             ),
           ),
         ),
-        onTap: () => Get.toNamed(
-          ProductDetailView.routeName,
-          arguments: product,
-        ),
+        onTap: () =>
+            Get.toNamed(ProductDetailView.routeName, arguments: product),
       ),
     );
   }

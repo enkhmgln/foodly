@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:foodly/client/api/product_api.dart';
-import 'package:foodly/client/models/product_model.dart';
+import '/client/api/product_api.dart';
+import '/client/models/product_model.dart';
 
 class ProductDetailController extends GetxController {
   final ProductApi _productApi = Get.find<ProductApi>();
@@ -25,15 +25,14 @@ class ProductDetailController extends GetxController {
   }
 
   Future<void> loadProductById(String id) async {
-    try {
-      isLoading.value = true;
-      errorMessage.value = '';
-      final p = await _productApi.getProductById(id);
-      product.value = p;
-    } catch (e) {
-      errorMessage.value = e.toString();
-    } finally {
-      isLoading.value = false;
+    isLoading.value = true;
+    errorMessage.value = '';
+    final result = await _productApi.getProductById(id);
+    if (result.isSuccess) {
+      product.value = result.dataOrNull;
+    } else {
+      errorMessage.value = result.message;
     }
+    isLoading.value = false;
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:foodly/core/storage/onboarding_storage.dart';
-import 'package:foodly/screens/auth/login/_.dart';
+import '/core/storage/onboarding_storage.dart';
+import '/screens/auth/login/_.dart';
 
 class OnboardingController extends GetxController {
   final OnboardingStorage _onboardingStorage = Get.find<OnboardingStorage>();

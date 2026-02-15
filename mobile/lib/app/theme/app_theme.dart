@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodly/app/theme/app_colors.dart';
+import '/app/theme/app_colors.dart';
 
 abstract class AppTheme {
   AppTheme._();
@@ -55,10 +55,11 @@ abstract class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.surface,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       ),
     );
   }

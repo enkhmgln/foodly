@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:foodly/app/theme/app_colors.dart';
-import 'package:foodly/core/constants/app_constants.dart';
-import 'package:foodly/screens/init/init_controller.dart';
+import '/app/theme/app_colors.dart';
+import '/core/constants/app_constants.dart';
+import '/screens/init/init_controller.dart';
 
 class InitView extends GetView<InitController> {
   const InitView({super.key});

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:foodly/client/api/product_api.dart';
-import 'package:foodly/screens/product_detail/_.dart';
+import '/client/api/product_api.dart';
+import '/screens/product_detail/_.dart';
 
 class ScanController extends GetxController {
   final ProductApi _productApi = Get.find<ProductApi>();
@@ -14,27 +14,23 @@ class ScanController extends GetxController {
     if (_hasHandledBarcode) return;
     _hasHandledBarcode = true;
 
-    try {
-      isLoading.value = true;
-      errorMessage.value = '';
-      final product = await _productApi.getProductByBarcode(barcode);
-      if (product != null) {
-        Get.offNamed(ProductDetailView.routeName, arguments: product);
-      } else {
-        Get.snackbar(
-          'Бүтээгдэхүүн олдсонгүй',
-          'Энэ баркодтой бүтээгдэхүүн олдсонгүй.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
-        _hasHandledBarcode = false;
-      }
-    } catch (e) {
-      errorMessage.value = e.toString();
-      Get.snackbar('Алдаа', e.toString(), snackPosition: SnackPosition.BOTTOM);
+    isLoading.value = true;
+    errorMessage.value = '';
+    final result = await _productApi.getProductByBarcode(barcode);
+    if (result.isSuccess && result.dataOrNull != null) {
+      Get.offNamed(ProductDetailView.routeName, arguments: result.dataOrNull);
+    } else {
+      final message = result.isFailure
+          ? result.message
+          : 'Энэ баркодтой бүтээгдэхүүн олдсонгүй.';
+      Get.snackbar(
+        result.isFailure ? 'Алдаа' : 'Бүтээгдэхүүн олдсонгүй',
+        message,
+        snackPosition: SnackPosition.BOTTOM,
+      );
       _hasHandledBarcode = false;
-    } finally {
-      isLoading.value = false;
     }
+    isLoading.value = false;
   }
 
   void resetHandled() {

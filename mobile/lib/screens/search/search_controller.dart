@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:foodly/client/api/product_api.dart';
-import 'package:foodly/client/models/product_model.dart';
-import 'package:foodly/screens/product_detail/_.dart';
+import '/client/api/product_api.dart';
+import '/client/models/product_model.dart';
+import '/screens/product_detail/_.dart';
 
 class SearchController extends GetxController {
   final ProductApi _productApi = Get.find<ProductApi>();
@@ -14,7 +14,11 @@ class SearchController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    debounce(searchQuery, (_) => _search(), time: const Duration(milliseconds: 300));
+    debounce(
+      searchQuery,
+      (_) => _search(),
+      time: const Duration(milliseconds: 300),
+    );
   }
 
   Future<void> _search() async {
@@ -24,17 +28,16 @@ class SearchController extends GetxController {
       errorMessage.value = '';
       return;
     }
-    try {
-      isLoading.value = true;
-      errorMessage.value = '';
-      final list = await _productApi.searchProducts(q);
-      products.value = list;
-    } catch (e) {
-      errorMessage.value = e.toString();
+    isLoading.value = true;
+    errorMessage.value = '';
+    final result = await _productApi.searchProducts(q);
+    if (result.isSuccess) {
+      products.value = result.dataOrNull ?? [];
+    } else {
+      errorMessage.value = result.message;
       products.clear();
-    } finally {
-      isLoading.value = false;
     }
+    isLoading.value = false;
   }
 
   void onProductTap(ProductModel product) {

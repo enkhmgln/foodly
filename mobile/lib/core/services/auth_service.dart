@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
-import 'package:foodly/client/api/auth_api.dart';
-import 'package:foodly/client/models/auth_response_model.dart';
-import 'package:foodly/client/models/user_model.dart';
-import 'package:foodly/core/storage/secure_storage_service.dart';
-import 'package:foodly/screens/auth/login/_.dart';
-import 'package:foodly/screens/home/home/_.dart';
+import '/client/api/api_result.dart';
+import '/client/api/auth_api.dart';
+import '/client/models/auth_response_model.dart';
+import '/client/models/user_model.dart';
+import '/core/storage/secure_storage_service.dart';
+import '/screens/auth/login/_.dart';
+import '/screens/home/home/_.dart';
 
 class AuthService extends GetxService {
   final SecureStorageService _storage = Get.find<SecureStorageService>();
@@ -19,11 +20,6 @@ class AuthService extends GetxService {
   late final Future<void> _tokenLoaded = _loadStoredToken();
   Future<void> get tokenLoaded => _tokenLoaded;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   Future<void> _loadStoredToken() async {
     _token = await _storage.readToken();
     if (_token != null && _token!.isNotEmpty) {
@@ -31,24 +27,40 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<void> login(String email, String password) async {
+  /// Returns [ApiResult] so callers can show error without try-catch.
+  Future<ApiResult<Object?>> login(String email, String password) async {
     final authApi = Get.find<AuthApi>();
     final result = await authApi.login(email: email, password: password);
-    if (result == null) return;
-    await _saveAuth(result);
+    if (result.isFailure) {
+      return ApiFailure(result.message, statusCode: result.statusCode);
+    }
+    final data = result.dataOrNull;
+    if (data == null) return const ApiFailure('Алдаа гарлаа');
+    await _saveAuth(data);
     Get.offAllNamed(HomeView.routeName);
+    return const ApiSuccess(null);
   }
 
-  Future<void> signUp(String email, String password, {String? name}) async {
+  /// Returns [ApiResult] so callers can show error without try-catch.
+  Future<ApiResult<Object?>> signUp(
+    String email,
+    String password, {
+    String? name,
+  }) async {
     final authApi = Get.find<AuthApi>();
     final result = await authApi.signUp(
       email: email,
       password: password,
       name: name,
     );
-    if (result == null) return;
-    await _saveAuth(result);
+    if (result.isFailure) {
+      return ApiFailure(result.message, statusCode: result.statusCode);
+    }
+    final data = result.dataOrNull;
+    if (data == null) return const ApiFailure('Алдаа гарлаа');
+    await _saveAuth(data);
     Get.offAllNamed(HomeView.routeName);
+    return const ApiSuccess(null);
   }
 
   Future<void> _saveAuth(AuthResponseModel result) async {

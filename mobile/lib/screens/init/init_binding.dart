@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:foodly/screens/init/init_controller.dart';
+import '/screens/init/init_controller.dart';
 
 class InitBinding extends Bindings {
   @override

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:foodly/client/api/product_api.dart';
-import 'package:foodly/screens/product_detail/product_detail_controller.dart';
+import '/client/api/product_api.dart';
+import '/screens/product_detail/product_detail_controller.dart';
 
 class ProductDetailBinding extends Bindings {
   @override

@@ -1,4 +1,4 @@
-import 'package:foodly/core/constants/api_constants.dart';
+import '/core/constants/api_constants.dart';
 
 abstract class ApiConfig {
   ApiConfig._();

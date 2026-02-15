@@ -1,7 +1,6 @@
-import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
-import 'package:foodly/core/services/auth_service.dart';
-import 'package:foodly/screens/auth/login/_.dart';
+import '/core/services/auth_service.dart';
+import '/screens/auth/login/_.dart';
 
 class SignupController extends GetxController {
   final AuthService _authService = Get.find<AuthService>();
@@ -32,38 +31,17 @@ class SignupController extends GetxController {
       return;
     }
 
-    try {
-      isLoading.value = true;
-      errorMessage.value = '';
-      await _authService.signUp(e, p, name: n.isEmpty ? null : n);
-    } on dio.DioException catch (e) {
-      errorMessage.value = _extractMessage(e);
-      Get.snackbar('Алдаа', errorMessage.value);
-    } on Exception catch (e) {
-      errorMessage.value = _extractMessageFromException(e);
-      Get.snackbar('Алдаа', errorMessage.value);
-    } finally {
-      isLoading.value = false;
+    isLoading.value = true;
+    errorMessage.value = '';
+    final result = await _authService.signUp(e, p, name: n.isEmpty ? null : n);
+    if (result.isFailure) {
+      errorMessage.value = result.message;
+      Get.snackbar('Алдаа', result.message);
     }
+    isLoading.value = false;
   }
 
   void goToLogin() {
     Get.offNamed(LoginView.routeName);
-  }
-
-  String _extractMessage(dio.DioException e) {
-    final data = e.response?.data;
-    if (data is Map<String, dynamic>) {
-      final msg = data['message'];
-      if (msg is String && msg.isNotEmpty) return msg;
-    }
-    if (e.response?.statusCode == 409) return 'Имэйл бүртгэлтэй байна';
-    return 'Бүртгүүлэхэд алдаа гарлаа';
-  }
-
-  String _extractMessageFromException(Exception e) {
-    final s = e.toString();
-    if (s.contains('409') || s.contains('бүртгэлтэй')) return 'Имэйл бүртгэлтэй байна';
-    return 'Бүртгүүлэхэд алдаа гарлаа';
   }
 }

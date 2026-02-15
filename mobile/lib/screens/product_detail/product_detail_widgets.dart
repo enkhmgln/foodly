@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodly/app/theme/app_colors.dart';
-import 'package:foodly/client/models/product_model.dart';
+import '/app/theme/app_colors.dart';
+import '/client/models/product_model.dart';
 
 class ScoreCircle extends StatelessWidget {
   const ScoreCircle({
@@ -32,16 +32,16 @@ class ScoreCircle extends StatelessWidget {
           Text(
             '$score',
             style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: color,
-                ),
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
           ),
           Text(
             _gradeLabelMn(grade),
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: color,
-                  fontWeight: FontWeight.w600,
-                ),
+              color: color,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ],
       ),

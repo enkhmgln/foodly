@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:foodly/app/theme/app_colors.dart';
-import 'package:foodly/screens/product_detail/product_detail_controller.dart';
-import 'package:foodly/screens/product_detail/product_detail_widgets.dart';
+import '/app/theme/app_colors.dart';
+import '/screens/product_detail/product_detail_controller.dart';
+import '/screens/product_detail/product_detail_widgets.dart';
 
 class ProductDetailView extends GetView<ProductDetailController> {
   const ProductDetailView({super.key});
@@ -13,9 +13,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Бүтээгдэхүүн'),
-      ),
+      appBar: AppBar(title: const Text('Бүтээгдэхүүн')),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
@@ -72,16 +70,16 @@ class ProductDetailView extends GetView<ProductDetailController> {
               Text(
                 p.name,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
-                    ),
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
               ),
               const SizedBox(height: 4),
               Text(
                 p.brand,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.textSecondary,
-                    ),
+                  color: AppColors.textSecondary,
+                ),
               ),
               const SizedBox(height: 24),
               Center(
@@ -99,23 +97,23 @@ class ProductDetailView extends GetView<ProductDetailController> {
               Text(
                 p.summary,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: AppColors.textPrimary,
-                      height: 1.5,
-                    ),
+                  color: AppColors.textPrimary,
+                  height: 1.5,
+                ),
               ),
               const SizedBox(height: 32),
               Text(
                 'Илүү сайн сонголтууд',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 8),
               Text(
                 'Одоогоор сонголт байхгүй',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.textSecondary,
-                    ),
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),

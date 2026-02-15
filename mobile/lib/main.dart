@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:foodly/app/routes/app_pages.dart';
-import 'package:foodly/app/theme/app_theme.dart';
-import 'package:foodly/client/api/api_client.dart';
-import 'package:foodly/client/api/auth_api.dart';
-import 'package:foodly/core/services/auth_service.dart';
-import 'package:foodly/core/storage/onboarding_storage.dart';
-import 'package:foodly/core/storage/secure_storage_service.dart';
+import '/app/routes/app_pages.dart';
+import '/app/theme/app_theme.dart';
+import '/client/api/api_client.dart';
+import '/client/api/auth_api.dart';
+import '/core/services/auth_service.dart';
+import '/core/storage/onboarding_storage.dart';
+import '/core/storage/secure_storage_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

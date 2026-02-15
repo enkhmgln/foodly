@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:foodly/screens/auth/onboarding/onboarding_controller.dart';
+import '/screens/auth/onboarding/onboarding_controller.dart';
 
 class OnboardingBinding extends Bindings {
   @override
