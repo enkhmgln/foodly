@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/theme/app_colors.dart';
-import '/core/constants/app_constants.dart';
+import '/core/constants/constant.dart';
 import '/screens/home/home/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -30,7 +30,7 @@ class HomeView extends GetView<HomeController> {
             children: [
               const SizedBox(height: 48),
               Text(
-                AppConstants.appName,
+                appName,
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                   color: AppColors.primary,
                   fontWeight: FontWeight.bold,

@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import '/core/constants/storage_keys.dart';
+import '/core/constants/constant.dart';
 
 class SecureStorageService {
   static const _storage = FlutterSecureStorage(
@@ -8,17 +8,17 @@ class SecureStorageService {
 
   Future<void> writeToken(String? token) async {
     if (token == null || token.isEmpty) {
-      await _storage.delete(key: StorageKeys.authToken);
+      await _storage.delete(key: kAuthToken);
     } else {
-      await _storage.write(key: StorageKeys.authToken, value: token);
+      await _storage.write(key: kAuthToken, value: token);
     }
   }
 
   Future<String?> readToken() async {
-    return _storage.read(key: StorageKeys.authToken);
+    return _storage.read(key: kAuthToken);
   }
 
   Future<void> clearToken() async {
-    await _storage.delete(key: StorageKeys.authToken);
+    await _storage.delete(key: kAuthToken);
   }
 }

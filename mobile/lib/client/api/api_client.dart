@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import '/client/api/api_config.dart';
+import '/core/constants/constant.dart';
 import '/core/services/auth_service.dart';
+
+const _connectTimeout = Duration(seconds: 30);
+const _receiveTimeout = Duration(seconds: 30);
 
 class ApiClient extends GetxService {
   late final dio.Dio _dio;
@@ -12,9 +15,9 @@ class ApiClient extends GetxService {
     super.onInit();
     _dio = dio.Dio(
       dio.BaseOptions(
-        baseUrl: ApiConfig.baseUrl,
-        connectTimeout: ApiConfig.connectTimeout,
-        receiveTimeout: ApiConfig.receiveTimeout,
+        baseUrl: baseUrl,
+        connectTimeout: _connectTimeout,
+        receiveTimeout: _receiveTimeout,
         headers: {'Accept': 'application/json'},
       ),
     );

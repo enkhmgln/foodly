@@ -1,8 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import '/core/constants/storage_keys.dart';
+import '/core/constants/constant.dart';
 
 class OnboardingStorage {
-  static const String _key = StorageKeys.onboardingDone;
+  static const String _key = kOnboardingDone;
 
   Future<bool> hasSeenOnboarding() async {
     final prefs = await SharedPreferences.getInstance();
