@@ -18,7 +18,7 @@ class FoodlyApp extends StatelessWidget {
       title: 'Foodly',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
-      initialRoute: AppPages.initial,
+      initialRoute: AppPages.splash,
       getPages: AppPages.routes,
     );
   }

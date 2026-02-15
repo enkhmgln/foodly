@@ -1,29 +1,16 @@
 import 'package:get/get.dart';
-import '/core/shared/user_manager.dart';
-import '/screens/auth/onboarding/_.dart';
-import '/screens/auth/login/_.dart';
-import '/screens/home/home/_.dart';
+import '/app/routes/app_pages.dart';
 
 class SplashController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    _resolveInitialRoute();
+    _goToInitial();
   }
 
-  Future<void> _resolveInitialRoute() async {
+  Future<void> _goToInitial() async {
     await Future.delayed(const Duration(milliseconds: 300));
-
-    if (!UserManager.isOnboardingCompleted) {
-      Get.offAllNamed(OnboardingView.routeName);
-      return;
-    }
-
-    if (UserManager.isLogged) {
-      Get.offAllNamed(HomeView.routeName);
-      return;
-    }
-
-    Get.offAllNamed(LoginView.routeName);
+    final route = AppPages.initial;
+    Get.offAllNamed(route);
   }
 }

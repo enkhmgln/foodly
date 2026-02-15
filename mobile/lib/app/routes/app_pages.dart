@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '/core/shared/user_manager.dart';
 import '/screens/splash/_.dart';
 import '/screens/auth/onboarding/_.dart';
 import '/screens/auth/login/_.dart';
@@ -11,7 +12,14 @@ import '/screens/product_detail/_.dart';
 class AppPages {
   AppPages._();
 
-  static String get initial => SplashView.routeName;
+  /// First screen shown (splash).
+  static String get splash => SplashView.routeName;
+
+  static String get initial => !UserManager.isOnboardingCompleted
+      ? OnboardingView.routeName
+      : !UserManager.isLogged
+      ? LoginView.routeName
+      : HomeView.routeName;
 
   static final List<GetPage> routes = [
     GetPage(
