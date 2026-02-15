@@ -14,7 +14,8 @@ public record SignupRequest(
         @NotBlank(message = "Нууц үг оруулна уу")
         @Size(min = 8, message = "Нууц үг хамгийн багадаа 8 тэмдэгт байна")
         String password,
-        String name
+        String name,
+        String fcmToken
         ) {
 
 }

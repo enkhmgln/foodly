@@ -6,7 +6,8 @@ public record LoginRequest(
         @NotBlank(message = "Имэйл оруулна уу")
         String email,
         @NotBlank(message = "Нууц үг оруулна уу")
-        String password
+        String password,
+        String fcmToken
         ) {
 
 }

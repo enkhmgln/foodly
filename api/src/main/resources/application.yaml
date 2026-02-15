@@ -29,3 +29,6 @@ spring:
 jwt:
   secret: ${JWT_SECRET:foodly-dev-secret-change-in-production-min-256-bits}
   expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
+firebase:
+  credentials-path: firebase-service.json

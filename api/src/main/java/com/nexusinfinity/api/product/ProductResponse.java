@@ -19,6 +19,9 @@ public record ProductResponse(
         ) {
 
     public static ProductResponse fromEntity(Product entity) {
+        List<String> tagStrings = entity.getIssueTags().stream()
+                .map(ProductIssueTag::getTag)
+                .toList();
         return new ProductResponse(
                 entity.getId().toString(),
                 entity.getName(),
@@ -28,7 +31,7 @@ public record ProductResponse(
                 entity.getScore(),
                 gradeFromScore(entity.getScore()),
                 entity.getSummary(),
-                entity.getIssueTags(),
+                tagStrings,
                 entity.getImageUrl()
         );
     }

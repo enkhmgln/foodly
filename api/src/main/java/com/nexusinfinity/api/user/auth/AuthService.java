@@ -7,6 +7,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.nexusinfinity.api.core.response.ApiMessages;
 import com.nexusinfinity.api.core.security.JwtService;
+import com.nexusinfinity.api.notification.FcmService;
+import com.nexusinfinity.api.notification.Notification;
+import com.nexusinfinity.api.notification.NotificationRepository;
 import com.nexusinfinity.api.user.User;
 import com.nexusinfinity.api.user.UserRepository;
 import com.nexusinfinity.api.user.UserResponse;
@@ -15,11 +18,16 @@ import com.nexusinfinity.api.user.UserResponse;
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final FcmService fcmService;
+    private final NotificationRepository notificationRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
+    public AuthService(UserRepository userRepository, FcmService fcmService,
+            NotificationRepository notificationRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
+        this.fcmService = fcmService;
+        this.notificationRepository = notificationRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
     }
@@ -36,6 +44,13 @@ public class AuthService {
                 .name(name)
                 .build();
         user = userRepository.save(user);
+        fcmService.registerToken(user, request.fcmToken());
+        fcmService.sendToUser(user.getId(), "Foodly-д тавтай морил!", "Бидэнтэй нэгдсэн танд баярлалаа. Бүтээгдэхүүний эрүүл мэндийн үнэлгээг харахын тулд скан хийж эхлээрэй.", null);
+        notificationRepository.save(Notification.builder()
+                .user(user)
+                .title("Foodly-д тавтай морил!")
+                .body("Бидэнтэй нэгдсэн танд баярлалаа. Бүтээгдэхүүний эрүүл мэндийн үнэлгээг харахын тулд скан хийж эхлээрэй.")
+                .build());
         String token = jwtService.generateToken(user.getEmail());
         return new AuthResponse(token, UserResponse.fromEntity(user));
     }
@@ -47,6 +62,7 @@ public class AuthService {
         if (!passwordEncoder.matches(request.password(), user.getPasswordHash())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, ApiMessages.AUTH_INVALID_CREDENTIALS);
         }
+        fcmService.registerToken(user, request.fcmToken());
         String token = jwtService.generateToken(user.getEmail());
         return new AuthResponse(token, UserResponse.fromEntity(user));
     }
