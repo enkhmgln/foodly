@@ -1,11 +1,10 @@
-import 'package:get/get.dart';
 import '/client/api/api_client.dart';
 import '/client/api/api_result.dart';
 import '/client/api/response_sender.dart';
 import '/client/models/product_model.dart';
 
 class ProductApi {
-  final ResponseSender _sender = ResponseSender(Get.find<ApiClient>());
+  final ResponseSender _sender = ResponseSender(ApiClient());
 
   Future<ApiResult<ProductModel?>> getProductByBarcode(String barcode) async {
     return _sender.get(

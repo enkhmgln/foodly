@@ -1,12 +1,11 @@
-import 'package:get/get.dart';
 import '/client/api/api_client.dart';
 import '/client/api/api_result.dart';
 import '/client/api/response_sender.dart';
 import '/client/models/auth_response_model.dart';
 import '/client/models/user_model.dart';
 
-class AuthApi {
-  final ResponseSender _sender = ResponseSender(Get.find<ApiClient>());
+class UserApi {
+  final ResponseSender _sender = ResponseSender(ApiClient());
 
   Future<ApiResult<AuthResponseModel>> signUp({
     required String email,
@@ -20,7 +19,8 @@ class AuthApi {
         'password': password,
         if (name != null && name.trim().isNotEmpty) 'name': name.trim(),
       },
-      fromJson: (d) => AuthResponseModel.fromJson(d as Map<String, dynamic>),
+      fromJson: (d) =>
+          AuthResponseModel.fromJson(d as Map<String, dynamic>),
     );
   }
 
@@ -30,8 +30,12 @@ class AuthApi {
   }) async {
     return _sender.post(
       '/api/auth/login',
-      data: {'email': email.trim().toLowerCase(), 'password': password},
-      fromJson: (d) => AuthResponseModel.fromJson(d as Map<String, dynamic>),
+      data: {
+        'email': email.trim().toLowerCase(),
+        'password': password,
+      },
+      fromJson: (d) =>
+          AuthResponseModel.fromJson(d as Map<String, dynamic>),
     );
   }
 

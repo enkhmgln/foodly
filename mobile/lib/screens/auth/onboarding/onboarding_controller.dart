@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '/core/storage/onboarding_storage.dart';
+import '/core/constants/constant.dart';
+import '/core/shared/store_manager.dart';
 import '/screens/auth/login/_.dart';
 
 class OnboardingController extends GetxController {
-  final OnboardingStorage _onboardingStorage = Get.find<OnboardingStorage>();
-
   final PageController pageController = PageController();
   final RxInt currentPage = 0.obs;
   static const int totalPages = 3;
@@ -15,12 +14,12 @@ class OnboardingController extends GetxController {
   }
 
   Future<void> onGetStarted() async {
-    await _onboardingStorage.setOnboardingDone();
+    await DeviceStoreManager.shared.write(kOnboardingCompleted, true);
     Get.offAllNamed(LoginView.routeName);
   }
 
   Future<void> onSkip() async {
-    await _onboardingStorage.setOnboardingDone();
+    await DeviceStoreManager.shared.write(kOnboardingCompleted, true);
     Get.offAllNamed(LoginView.routeName);
   }
 

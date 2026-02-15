@@ -1,9 +1,12 @@
 import 'package:get/get.dart';
-import '/core/services/auth_service.dart';
+import '/client/api/user_api.dart';
+import '/core/constants/constant.dart';
+import '/core/shared/store_manager.dart';
 import '/screens/auth/login/_.dart';
+import '/screens/home/home/_.dart';
 
 class SignupController extends GetxController {
-  final AuthService _authService = Get.find<AuthService>();
+  final UserApi _userApi = UserApi();
 
   final RxString email = ''.obs;
   final RxString name = ''.obs;
@@ -33,8 +36,19 @@ class SignupController extends GetxController {
 
     isLoading.value = true;
     errorMessage.value = '';
-    final result = await _authService.signUp(e, p, name: n.isEmpty ? null : n);
-    if (result.isFailure) {
+    final result = await _userApi.signUp(
+      email: e,
+      password: p,
+      name: n.isEmpty ? null : n,
+    );
+    if (result.isSuccess) {
+      final data = result.dataOrNull;
+      if (data != null) {
+        await UserStoreManager.shared.write(kToken, data.token);
+        await UserStoreManager.shared.write(kUser, data.user.toJson());
+        Get.offAllNamed(HomeView.routeName);
+      }
+    } else {
       errorMessage.value = result.message;
       Get.snackbar('Алдаа', result.message);
     }

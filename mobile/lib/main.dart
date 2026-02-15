@@ -2,19 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/routes/app_pages.dart';
 import '/app/theme/app_theme.dart';
-import '/client/api/api_client.dart';
-import '/client/api/auth_api.dart';
-import '/core/services/auth_service.dart';
-import '/core/storage/onboarding_storage.dart';
-import '/core/storage/secure_storage_service.dart';
+import '/app_config.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  Get.put<SecureStorageService>(SecureStorageService());
-  Get.put<AuthService>(AuthService());
-  Get.put<ApiClient>(ApiClient());
-  Get.put<AuthApi>(AuthApi());
-  Get.put<OnboardingStorage>(OnboardingStorage());
+void main() async {
+  await AppConfig.init();
   runApp(const FoodlyApp());
 }
 

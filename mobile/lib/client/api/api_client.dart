@@ -1,18 +1,13 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
 import '/core/constants/constant.dart';
-import '/core/services/auth_service.dart';
+import '/core/shared/user_manager.dart';
 
 const _connectTimeout = Duration(seconds: 30);
 const _receiveTimeout = Duration(seconds: 30);
 
-class ApiClient extends GetxService {
-  late final dio.Dio _dio;
-
-  @override
-  void onInit() {
-    super.onInit();
+class ApiClient {
+  ApiClient._() {
     _dio = dio.Dio(
       dio.BaseOptions(
         baseUrl: baseUrl,
@@ -28,6 +23,11 @@ class ApiClient extends GetxService {
       );
     }
   }
+
+  static final ApiClient _instance = ApiClient._();
+  factory ApiClient() => _instance;
+
+  late final dio.Dio _dio;
 
   Future<dio.Response<T>> get<T>(
     String path, {
@@ -68,11 +68,9 @@ class _AuthInterceptor extends dio.Interceptor {
       handler.next(options);
       return;
     }
-    if (Get.isRegistered<AuthService>()) {
-      final token = Get.find<AuthService>().getToken();
-      if (token != null && token.isNotEmpty) {
-        options.headers['Authorization'] = 'Bearer $token';
-      }
+    final token = UserManager.token;
+    if (token.isNotEmpty) {
+      options.headers['Authorization'] = 'Bearer $token';
     }
     handler.next(options);
   }

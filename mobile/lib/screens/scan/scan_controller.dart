@@ -3,7 +3,7 @@ import '/client/api/product_api.dart';
 import '/screens/product_detail/_.dart';
 
 class ScanController extends GetxController {
-  final ProductApi _productApi = Get.find<ProductApi>();
+  final ProductApi _productApi = ProductApi();
 
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;

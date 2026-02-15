@@ -1,11 +1,9 @@
 import 'package:get/get.dart';
-import '/core/services/auth_service.dart';
+import '/core/shared/session_manager.dart';
 import '/screens/scan/_.dart';
 import '/screens/search/_.dart';
 
 class HomeController extends GetxController {
-  final AuthService _authService = Get.find<AuthService>();
-
   void onScanTap() {
     Get.toNamed(ScanView.routeName);
   }
@@ -15,6 +13,6 @@ class HomeController extends GetxController {
   }
 
   Future<void> logout() async {
-    await _authService.logout();
+    await SessionManager.shared.logout();
   }
 }

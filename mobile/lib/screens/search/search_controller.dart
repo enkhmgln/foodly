@@ -4,7 +4,7 @@ import '/client/models/product_model.dart';
 import '/screens/product_detail/_.dart';
 
 class SearchController extends GetxController {
-  final ProductApi _productApi = Get.find<ProductApi>();
+  final ProductApi _productApi = ProductApi();
 
   final RxString searchQuery = ''.obs;
   final RxList<ProductModel> products = <ProductModel>[].obs;

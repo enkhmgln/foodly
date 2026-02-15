@@ -3,7 +3,7 @@ import '/client/api/product_api.dart';
 import '/client/models/product_model.dart';
 
 class ProductDetailController extends GetxController {
-  final ProductApi _productApi = Get.find<ProductApi>();
+  final ProductApi _productApi = ProductApi();
 
   final Rx<ProductModel?> product = Rx<ProductModel?>(null);
   final RxBool isLoading = true.obs;
