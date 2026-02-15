@@ -11,6 +11,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.bottom,
     this.backgroundColor,
     this.foregroundColor,
+    this.showLeading = true,
   });
 
   final String? titleText;
@@ -20,6 +21,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   final Color? backgroundColor;
   final Color? foregroundColor;
+  final bool showLeading;
 
   @override
   Size get preferredSize {
@@ -34,7 +36,9 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
       foregroundColor: foregroundColor ?? AppColors.textPrimary,
       centerTitle: true,
       elevation: 0,
-      leading: leading,
+      automaticallyImplyLeading: showLeading,
+      leading: showLeading ? leading : const SizedBox.shrink(),
+      leadingWidth: showLeading ? null : 0,
       actions: actions,
       bottom: bottom,
       title: title ??
