@@ -4,7 +4,7 @@ import '/screens/auth/onboarding/_.dart';
 import '/screens/auth/login/_.dart';
 import '/screens/home/home/_.dart';
 
-class InitController extends GetxController {
+class SplashController extends GetxController {
   @override
   void onReady() {
     super.onReady();

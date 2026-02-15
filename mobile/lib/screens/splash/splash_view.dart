@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/theme/app_colors.dart';
 import '/core/constants/constant.dart';
-import '/screens/init/init_controller.dart';
+import '/screens/splash/splash_controller.dart';
 
-class InitView extends GetView<InitController> {
-  const InitView({super.key});
+class SplashView extends GetView<SplashController> {
+  const SplashView({super.key});
 
   static const String routeName = '/';
 

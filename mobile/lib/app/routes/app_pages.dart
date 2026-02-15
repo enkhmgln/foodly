@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '/screens/init/_.dart';
+import '/screens/splash/_.dart';
 import '/screens/auth/onboarding/_.dart';
 import '/screens/auth/login/_.dart';
 import '/screens/auth/signup/_.dart';
@@ -11,13 +11,13 @@ import '/screens/product_detail/_.dart';
 class AppPages {
   AppPages._();
 
-  static String get initial => InitView.routeName;
+  static String get initial => SplashView.routeName;
 
   static final List<GetPage> routes = [
     GetPage(
-      name: InitView.routeName,
-      page: () => const InitView(),
-      binding: InitBinding(),
+      name: SplashView.routeName,
+      page: () => const SplashView(),
+      binding: SplashBinding(),
     ),
     GetPage(
       name: OnboardingView.routeName,
