@@ -36,6 +36,22 @@ class ApiClient extends GetxService {
   Future<dio.Response<T>> post<T>(String path, {dynamic data}) async {
     return _dio.post<T>(path, data: data);
   }
+
+  Future<dio.Response<T>> patch<T>(String path, {dynamic data}) async {
+    return _dio.patch<T>(path, data: data);
+  }
+
+  Future<dio.Response<T>> delete<T>(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    dynamic data,
+  }) async {
+    return _dio.delete<T>(
+      path,
+      queryParameters: queryParameters,
+      data: data,
+    );
+  }
 }
 
 class _AuthInterceptor extends dio.Interceptor {

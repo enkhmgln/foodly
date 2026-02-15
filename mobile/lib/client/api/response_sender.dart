@@ -52,6 +52,51 @@ class ResponseSender {
     }
   }
 
+  Future<ApiResult<T>> patch<T>(
+    String path, {
+    dynamic data,
+    required T Function(dynamic) fromJson,
+  }) async {
+    try {
+      final response = await _apiClient.patch<dynamic>(path, data: data);
+      return _parseResponse(response, fromJson);
+    } on dio.DioException catch (e) {
+      return ApiFailure<T>(
+        _messageFromResponse(e.response?.data),
+        statusCode: e.response?.statusCode,
+      );
+    } on Object catch (e) {
+      return ApiFailure<T>(
+        e.toString().isNotEmpty ? e.toString() : _defaultError,
+      );
+    }
+  }
+
+  Future<ApiResult<T>> delete<T>(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    dynamic data,
+    required T Function(dynamic) fromJson,
+  }) async {
+    try {
+      final response = await _apiClient.delete<dynamic>(
+        path,
+        queryParameters: queryParameters,
+        data: data,
+      );
+      return _parseResponse(response, fromJson);
+    } on dio.DioException catch (e) {
+      return ApiFailure<T>(
+        _messageFromResponse(e.response?.data),
+        statusCode: e.response?.statusCode,
+      );
+    } on Object catch (e) {
+      return ApiFailure<T>(
+        e.toString().isNotEmpty ? e.toString() : _defaultError,
+      );
+    }
+  }
+
   ApiResult<T> _parseResponse<T>(
     dio.Response<dynamic> response,
     T Function(dynamic) fromJson,
