@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/theme/app_colors.dart';
+import '/components/_.dart';
 import '/screens/auth/onboarding/onboarding_controller.dart';
 
 class OnboardingView extends GetView<OnboardingController> {
@@ -10,8 +11,7 @@ class OnboardingView extends GetView<OnboardingController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
+    return AppScaffold(
       body: SafeArea(
         child: Column(
           children: [
@@ -52,10 +52,10 @@ class OnboardingView extends GetView<OnboardingController> {
               ),
             ),
             const SizedBox(height: 8),
-            Obx(() => _PageIndicator(
-              currentIndex: controller.currentPage.value,
-              pageCount: OnboardingController.totalPages,
-            )),
+            Obx(() => AppPageIndicator(
+                  currentIndex: controller.currentPage.value,
+                  pageCount: OnboardingController.totalPages,
+                )),
             const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.all(24),
@@ -63,56 +63,23 @@ class OnboardingView extends GetView<OnboardingController> {
                 final isLast =
                     controller.currentPage.value ==
                     OnboardingController.totalPages - 1;
-                return SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: isLast
-                        ? controller.onGetStarted
-                        : controller.nextPage,
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    child: Text(isLast ? 'Эхлэх' : 'Дараах'),
-                  ),
+                final btnModel = AppButtonModel(
+                  label: isLast ? 'Эхлэх' : 'Дараах',
+                  type: AppButtonType.primary,
+                  size: AppButtonSize.large,
+                  isExpanded: true,
+                );
+                return AppButtonWidget(
+                  model: btnModel,
+                  onPressed: isLast
+                      ? controller.onGetStarted
+                      : controller.nextPage,
                 );
               }),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _PageIndicator extends StatelessWidget {
-  const _PageIndicator({
-    required this.currentIndex,
-    required this.pageCount,
-  });
-
-  final int currentIndex;
-  final int pageCount;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(pageCount, (index) {
-        final isActive = index == currentIndex;
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          curve: Curves.easeInOut,
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          height: 8,
-          width: isActive ? 24 : 8,
-          decoration: BoxDecoration(
-            color: isActive
-                ? AppColors.primary
-                : AppColors.primary.withValues(alpha: 0.3),
-            borderRadius: BorderRadius.circular(4),
-          ),
-        );
-      }),
     );
   }
 }

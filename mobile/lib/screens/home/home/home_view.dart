@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/theme/app_colors.dart';
+import '/components/_.dart';
 import '/core/constants/constant.dart';
 import '/screens/home/home/home_controller.dart';
 
@@ -11,9 +12,9 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(
+    return AppScaffold(
+      appBar: AppAppBar(
+        title: const SizedBox.shrink(),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -44,24 +45,26 @@ class HomeView extends GetView<HomeController> {
                 ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
               ),
               const Spacer(),
-              ElevatedButton.icon(
-                onPressed: controller.onScanTap,
-                icon: const Icon(Icons.qr_code_scanner, size: 24),
-                label: const Text('Бүтээгдэхүүн скан хийх'),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 18),
+              AppButtonWidget(
+                model: AppButtonModel(
+                  label: 'Бүтээгдэхүүн скан хийх',
+                  type: AppButtonType.primary,
+                  size: AppButtonSize.large,
+                  prefixIcon: Icons.qr_code_scanner,
+                  isExpanded: true,
                 ),
+                onPressed: controller.onScanTap,
               ),
               const SizedBox(height: 12),
-              OutlinedButton.icon(
-                onPressed: controller.onSearchTap,
-                icon: const Icon(Icons.search, size: 22),
-                label: const Text('Бүтээгдэхүүн хайх'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.primary,
-                  side: const BorderSide(color: AppColors.primary),
-                  padding: const EdgeInsets.symmetric(vertical: 18),
+              AppButtonWidget(
+                model: AppButtonModel(
+                  label: 'Бүтээгдэхүүн хайх',
+                  type: AppButtonType.outline,
+                  size: AppButtonSize.large,
+                  prefixIcon: Icons.search,
+                  isExpanded: true,
                 ),
+                onPressed: controller.onSearchTap,
               ),
               const SizedBox(height: 32),
               Text(

@@ -1,27 +1,59 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/client/api/user_api.dart';
+import '/components/_.dart';
+import '/components/text_field/_.dart';
 import '/core/constants/constant.dart';
 import '/core/shared/store_manager.dart';
+import '/core/utils/validator.dart';
 import '/screens/auth/signup/_.dart';
 import '/screens/home/home/_.dart';
 
 class LoginController extends GetxController {
   final UserApi _userApi = UserApi();
 
-  final RxString email = ''.obs;
-  final RxString password = ''.obs;
+  final emailModel = AppTextFieldModel(
+    label: 'Имэйл',
+    hint: 'имэйл@жишээ.com',
+    keyboardType: TextInputType.emailAddress,
+    validators: [ValidatorType.notEmpty, ValidatorType.email],
+  );
+
+  final passwordModel = AppTextFieldModel(
+    label: 'Нууц үг',
+    obscureText: true,
+    keyboardType: TextInputType.visiblePassword,
+    validators: [ValidatorType.notEmpty, ValidatorType.password],
+  );
+
   final RxBool isLoading = false.obs;
-  final RxString errorMessage = ''.obs;
+
+  @override
+  void onClose() {
+    emailModel.dispose();
+    passwordModel.dispose();
+    super.onClose();
+  }
+
+  void _runValidation() {
+    if (emailModel.validators != null && emailModel.validators!.isNotEmpty) {
+      final r = Validator(validations: emailModel.validators!).isValid(emailModel.value);
+      emailModel.errorText.value = r.$2;
+    }
+    if (passwordModel.validators != null && passwordModel.validators!.isNotEmpty) {
+      final r = Validator(validations: passwordModel.validators!).isValid(passwordModel.value);
+      passwordModel.errorText.value = r.$2;
+    }
+  }
 
   Future<void> login() async {
-    final e = email.value.trim();
-    final p = password.value;
-    if (e.isEmpty || p.isEmpty) {
-      errorMessage.value = 'Имэйл болон нууц үгээ оруулна уу';
-      return;
-    }
+    Get.focusScope?.unfocus();
+    _runValidation();
+    if (!emailModel.isValid || !passwordModel.isValid) return;
+
+    final e = emailModel.value.trim();
+    final p = passwordModel.value;
     isLoading.value = true;
-    errorMessage.value = '';
     final result = await _userApi.login(email: e, password: p);
     if (result.isSuccess) {
       final data = result.dataOrNull;
@@ -31,8 +63,7 @@ class LoginController extends GetxController {
         Get.offAllNamed(HomeView.routeName);
       }
     } else {
-      errorMessage.value = result.message;
-      Get.snackbar('Алдаа', result.message);
+      AppToast.showError(result.message);
     }
     isLoading.value = false;
   }

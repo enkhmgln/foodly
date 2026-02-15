@@ -1,41 +1,84 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/client/api/user_api.dart';
+import '/components/_.dart';
+import '/components/text_field/_.dart';
 import '/core/constants/constant.dart';
 import '/core/shared/store_manager.dart';
+import '/core/utils/validator.dart';
 import '/screens/auth/login/_.dart';
 import '/screens/home/home/_.dart';
 
 class SignupController extends GetxController {
   final UserApi _userApi = UserApi();
 
-  final RxString email = ''.obs;
-  final RxString name = ''.obs;
-  final RxString password = ''.obs;
-  final RxString confirmPassword = ''.obs;
+  final emailModel = AppTextFieldModel(
+    label: 'Имэйл',
+    hint: 'имэйл@жишээ.com',
+    keyboardType: TextInputType.emailAddress,
+    validators: [ValidatorType.notEmpty, ValidatorType.email],
+  );
+
+  final nameModel = AppTextFieldModel(
+    label: 'Нэр (заавал биш)',
+  );
+
+  final passwordModel = AppTextFieldModel(
+    label: 'Нууц үг',
+    hint: 'Хамгийн багадаа 8 тэмдэгт',
+    obscureText: true,
+    keyboardType: TextInputType.visiblePassword,
+    validators: [ValidatorType.notEmpty, ValidatorType.password],
+  );
+
+  final confirmPasswordModel = AppTextFieldModel(
+    label: 'Нууц үг давтах',
+    obscureText: true,
+    keyboardType: TextInputType.visiblePassword,
+    validators: [ValidatorType.notEmpty, ValidatorType.password],
+  );
+
   final RxBool isLoading = false.obs;
-  final RxString errorMessage = ''.obs;
+
+  @override
+  void onClose() {
+    emailModel.dispose();
+    nameModel.dispose();
+    passwordModel.dispose();
+    confirmPasswordModel.dispose();
+    super.onClose();
+  }
+
+  void _runValidation() {
+    if (emailModel.validators != null && emailModel.validators!.isNotEmpty) {
+      final r = Validator(validations: emailModel.validators!).isValid(emailModel.value);
+      emailModel.errorText.value = r.$2;
+    }
+    if (passwordModel.validators != null && passwordModel.validators!.isNotEmpty) {
+      final r = Validator(validations: passwordModel.validators!).isValid(passwordModel.value);
+      passwordModel.errorText.value = r.$2;
+    }
+    if (confirmPasswordModel.validators != null && confirmPasswordModel.validators!.isNotEmpty) {
+      final r = Validator(validations: confirmPasswordModel.validators!).isValid(confirmPasswordModel.value);
+      confirmPasswordModel.errorText.value = r.$2;
+    }
+  }
 
   Future<void> signUp() async {
-    final e = email.value.trim();
-    final p = password.value;
-    final cp = confirmPassword.value;
-    final n = name.value.trim();
+    Get.focusScope?.unfocus();
+    _runValidation();
 
-    if (e.isEmpty || p.isEmpty) {
-      errorMessage.value = 'Имэйл болон нууц үгээ оруулна уу';
-      return;
-    }
-    if (p.length < 8) {
-      errorMessage.value = 'Нууц үг хамгийн багадаа 8 тэмдэгт байна';
-      return;
-    }
+    final p = passwordModel.value;
+    final cp = confirmPasswordModel.value;
     if (p != cp) {
-      errorMessage.value = 'Нууц үг тохирохгүй байна';
+      confirmPasswordModel.errorText.value = 'Нууц үг тохирохгүй байна';
       return;
     }
+    if (!emailModel.isValid || !passwordModel.isValid || !confirmPasswordModel.isValid) return;
 
+    final e = emailModel.value.trim();
+    final n = nameModel.value.trim();
     isLoading.value = true;
-    errorMessage.value = '';
     final result = await _userApi.signUp(
       email: e,
       password: p,
@@ -49,8 +92,7 @@ class SignupController extends GetxController {
         Get.offAllNamed(HomeView.routeName);
       }
     } else {
-      errorMessage.value = result.message;
-      Get.snackbar('Алдаа', result.message);
+      AppToast.showError(result.message);
     }
     isLoading.value = false;
   }

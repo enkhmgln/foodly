@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/theme/app_colors.dart';
+import '/components/_.dart';
 import '/screens/product_detail/product_detail_controller.dart';
 import '/screens/product_detail/product_detail_widgets.dart';
 
@@ -11,12 +12,11 @@ class ProductDetailView extends GetView<ProductDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(title: const Text('Бүтээгдэхүүн')),
+    return AppScaffold(
+      appBar: const AppAppBar(titleText: 'Бүтээгдэхүүн'),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const AppLoading();
         }
         if (controller.errorMessage.value.isNotEmpty) {
           return Center(
@@ -31,9 +31,13 @@ class ProductDetailView extends GetView<ProductDetailController> {
                     style: TextStyle(color: AppColors.textSecondary),
                   ),
                   const SizedBox(height: 16),
-                  TextButton(
+                  AppButtonWidget(
+                    model: AppButtonModel(
+                      label: 'Буцах',
+                      type: AppButtonType.text,
+                      size: AppButtonSize.medium,
+                    ),
                     onPressed: () => Get.back(),
-                    child: const Text('Буцах'),
                   ),
                 ],
               ),

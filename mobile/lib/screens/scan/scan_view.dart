@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import '/app/theme/app_colors.dart';
+import '/components/_.dart';
 import '/screens/scan/scan_controller.dart';
 
 class ScanView extends GetView<ScanController> {
@@ -13,10 +14,10 @@ class ScanView extends GetView<ScanController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
+      appBar: AppAppBar(
+        titleText: 'Бүтээгдэхүүн скан хийх',
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
-        title: const Text('Бүтээгдэхүүн скан хийх'),
       ),
       body: Stack(
         children: [
@@ -46,12 +47,12 @@ class ScanView extends GetView<ScanController> {
             ),
           ),
           Obx(() {
-            if (!controller.isLoading.value) return const SizedBox.shrink();
+            if (!controller.isLoading.value) {
+              return const SizedBox.shrink();
+            }
             return Container(
               color: Colors.black54,
-              child: const Center(
-                child: CircularProgressIndicator(color: AppColors.primary),
-              ),
+              child: const AppLoading(color: AppColors.primary),
             );
           }),
         ],

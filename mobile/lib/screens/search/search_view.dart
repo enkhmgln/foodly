@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/theme/app_colors.dart';
+import '/components/_.dart';
 import '/screens/search/search_controller.dart' as search;
 import '/screens/search/search_widgets.dart';
 
@@ -11,10 +12,9 @@ class SearchView extends GetView<search.SearchController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Хайлт'),
+    return AppScaffold(
+      appBar: AppAppBar(
+        titleText: 'Хайлт',
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(56),
           child: Padding(
@@ -25,8 +25,9 @@ class SearchView extends GetView<search.SearchController> {
                 hintText: 'Бүтээгдэхүүн хайх...',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: Obx(() {
-                  if (controller.searchQuery.value.isEmpty)
+                  if (controller.searchQuery.value.isEmpty) {
                     return const SizedBox.shrink();
+                  }
                   return IconButton(
                     icon: const Icon(Icons.clear),
                     onPressed: () {
@@ -44,7 +45,7 @@ class SearchView extends GetView<search.SearchController> {
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const AppLoading();
         }
         if (controller.errorMessage.value.isNotEmpty) {
           return Center(
@@ -59,9 +60,13 @@ class SearchView extends GetView<search.SearchController> {
                     style: const TextStyle(color: AppColors.textSecondary),
                   ),
                   const SizedBox(height: 16),
-                  ElevatedButton(
+                  AppButtonWidget(
+                    model: AppButtonModel(
+                      label: 'Дахин оролдох',
+                      type: AppButtonType.primary,
+                      size: AppButtonSize.medium,
+                    ),
                     onPressed: () => controller.searchQuery.refresh(),
-                    child: const Text('Дахин оролдох'),
                   ),
                 ],
               ),
