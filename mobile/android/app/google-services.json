@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "117142388791",
+    "project_id": "foodly-e7718",
+    "storage_bucket": "foodly-e7718.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117142388791:android:1f6aa0023322f86cc43fb2",
+        "android_client_info": {
+          "package_name": "com.nexusinfinity.foodly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO1P8iZL3zu0HpVW2qD0zFK23lYxi-GHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
