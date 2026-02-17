@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-import '/core/constants/constant.dart';
+import '/core/constants/config.dart';
 import '/core/shared/store_manager.dart';
 
 class FcmRegistrationManager {

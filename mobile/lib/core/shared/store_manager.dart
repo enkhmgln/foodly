@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '/core/constants/constant.dart';
+import '/core/constants/config.dart';
 
 class StoreManager {
   late GetStorage store;

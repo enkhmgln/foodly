@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '/client/models/user_model.dart';
-import '/core/constants/constant.dart';
+import '/core/constants/config.dart';
 import '/core/shared/store_manager.dart';
 
 class UserManager {

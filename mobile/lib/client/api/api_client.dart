@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/foundation.dart';
-import '/core/constants/constant.dart';
+import '/core/constants/config.dart';
 import '/core/shared/user_manager.dart';
 
 const _connectTimeout = Duration(seconds: 30);
@@ -49,11 +49,7 @@ class ApiClient {
     Map<String, dynamic>? queryParameters,
     dynamic data,
   }) async {
-    return _dio.delete<T>(
-      path,
-      queryParameters: queryParameters,
-      data: data,
-    );
+    return _dio.delete<T>(path, queryParameters: queryParameters, data: data);
   }
 }
 

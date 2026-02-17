@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '/app/routes/app_pages.dart';
 import '/client/api/user_api.dart';
-import '/core/constants/constant.dart';
+import '/core/constants/config.dart';
 import '/core/shared/store_manager.dart';
 
 class SessionManager {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/theme/app_colors.dart';
 import '/components/_.dart';
-import '/core/constants/constant.dart';
+import '/core/constants/config.dart';
 import '/screens/home/home/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {

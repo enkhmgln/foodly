@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '/core/constants/constant.dart';
+import '/core/constants/config.dart';
 import '/core/shared/store_manager.dart';
 import '/screens/auth/login/_.dart';
 
